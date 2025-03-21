@@ -332,7 +332,8 @@ This example evaluates to the following attribute set:
 
 ### `inherit` keyword
 
-The `inherit` keyword is syntactic sugar for `a = a`:
+The `inherit` keyword, when used in attribute sets, is syntactic sugar for
+`a = a`:
 
 ```nix
 let

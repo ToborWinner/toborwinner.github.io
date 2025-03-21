@@ -16,7 +16,8 @@ let
 in b + 1
 ```
 
-This example evaluates to `2`{.nix} without throwing any errors. Why? `a` is never requested, so it's never evaluated.
+This example evaluates to `2`{.nix} without throwing any errors. Why? `a` is
+never requested, so it's never evaluated.
 
 To better understand this behaviour, it helps to understand the order in which
 Nix evaluates Nix expressions. While it is true that Nix doesn't execute
@@ -169,8 +170,8 @@ let
 in res.b
 ```
 
-We are passing `myFunc`'s "future output" to itself, yet it works and
-successfully evaluates to `2`{.nix}! Let's use our mental model once again:
+We are passing `myFunc`'s "future output" to itself as an argument, yet it works
+and successfully evaluates to `2`{.nix}! Let's use our mental model once again:
 
 1. The result is `res.b`{.nix}, for which we need to evaluate `res.b`{.nix}.
 
@@ -190,10 +191,10 @@ successfully evaluates to `2`{.nix}! Let's use our mental model once again:
    already said is just `<output-of-myFunc>.a`{.nix}, which is `1`{.nix}.
 
 7. We continue going backwards and now calculate `<output-of-myFunc>.b` which is
-   `res.a + 1`{.nix}: `2`{.nix}.
+   `res.a + 1`{.nix}. The result is `2`{.nix}.
 
-8. We calculate `res.b`{.nix}, which is just `<output-of-myFunc>.b`:
-   `2`{.nix} again.
+8. We calculate `res.b`{.nix}, which is just `<output-of-myFunc>.b`. It is, of
+   course, `2`{.nix} again.
 
 9. We now have `res.b`{.nix}, which is the result we wanted. The final output is
    `2`{.nix}.
@@ -330,10 +331,10 @@ Looks like Nix crashed! It failed to recognize the repetition and this is
 probably a bug, but as you can see it cannot fully evaluate the value. That's of
 course because the full value would be infinitely large!
 
-While we're talking about flags, it's a good time to explain what the
-`--strict` flag is doing here. It is telling Nix to fully evaluate the value
-rather than to be lazy about its evaluation. Let's try to evaluate the following
-file without the `--strict` flag:
+While we're talking about flags, it's a good time to explain what the `--strict`
+flag is doing here. It is telling Nix to fully evaluate the value rather than to
+be lazy about its evaluation. Let's try to evaluate the following file without
+the `--strict` flag:
 
 ```nix
 {
