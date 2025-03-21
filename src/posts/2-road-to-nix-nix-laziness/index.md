@@ -16,14 +16,13 @@ let
 in b + 1
 ```
 
-This example evaluates to `2`{.nix} without throwing any errors. Why? Because
-since `a` is never requested, it's also never evaluated.
+This example evaluates to `2`{.nix} without throwing any errors. Why? `a` is never requested, so it's never evaluated.
 
 To better understand this behaviour, it helps to understand the order in which
 Nix evaluates Nix expressions. While it is true that Nix doesn't execute
 instructions sequentially, like other traditional programming languages do, you
 can think of Nix as going backwards through your code. It's important to note
-that here I don't mean backwards as in bottom to top, but rather logically
+that I don't mean backwards as in bottom to top here, but rather logically
 backwards.
 
 Let's make an example:
@@ -97,7 +96,7 @@ builtins.elemAt [ (throw "an error") "It's working!" ] 1
 This doesn't throw an error because the error is never evaluated thanks to lazy
 evaluation.
 
-> Note: We had to use parenthesis because the space that separates list items
+> Note: We had to use parentheses because the space that separates list items
 > has a higher priority than the space used to call functions. In other words,
 > the following evaluates to `"an error"`{.nix}:
 >
@@ -170,7 +169,7 @@ let
 in res.b
 ```
 
-We are passing as argument to `myFunc` its own "future output", yet it works and
+We are passing `myFunc`'s "future output" to itself, yet it works and
 successfully evaluates to `2`{.nix}! Let's use our mental model once again:
 
 1. The result is `res.b`{.nix}, for which we need to evaluate `res.b`{.nix}.
@@ -191,10 +190,10 @@ successfully evaluates to `2`{.nix}! Let's use our mental model once again:
    already said is just `<output-of-myFunc>.a`{.nix}, which is `1`{.nix}.
 
 7. We continue going backwards and now calculate `<output-of-myFunc>.b` which is
-   `res.a + 1`{.nix}. It is `2`{.nix}.
+   `res.a + 1`{.nix}: `2`{.nix}.
 
-8. We calculate `res.b`{.nix}, which is just `<output-of-myFunc>.b`. It is
-   `2`{.nix}.
+8. We calculate `res.b`{.nix}, which is just `<output-of-myFunc>.b`:
+   `2`{.nix} again.
 
 9. We now have `res.b`{.nix}, which is the result we wanted. The final output is
    `2`{.nix}.
@@ -221,7 +220,7 @@ in attrs.b
 ```
 
 Wouldn't this be a paradox? After all, it simplifies to `b = 1 + b`{.nix}, which
-is clearly a paradox right? It is indeed! Even Nix's laziness and recursion
+is clearly a paradox, right? It is indeed! Even Nix's laziness and recursion
 mechanics cannot save us from this issue. This is the error we get when trying
 to evaluate the above:
 
@@ -257,8 +256,8 @@ Indeed, you can even see in its
 [stack trace](https://en.wikipedia.org/wiki/Stack_trace){target="\_blank"}
 (information about what Nix was doing when the error happened) that it's using
 exactly our mental model and notices that it did the same step twice. If a step
-has a dependency on doing the same exact step again, that means that if you keep
-executing those steps you will never stop. An _infinite_ list of steps to
+is dependent on doing the same exact step over and over again, and if you keep
+executing those steps, you will never stop. An _infinite_ list of steps to
 execute!
 
 So, from this, not only do we learn that Nix doesn't allow us to break the laws
@@ -327,13 +326,13 @@ that:
 zsh: segmentation fault (core dumped)  nix-instantiate --eval --strict --json repeated.nix
 ```
 
-Looks like Nix fully crashed! It failed to recognize the repetition and this is
+Looks like Nix crashed! It failed to recognize the repetition and this is
 probably a bug, but as you can see it cannot fully evaluate the value. That's of
 course because the full value would be infinitely large!
 
-While we're in the topic of flags, it's a good time to explain what the
+While we're talking about flags, it's a good time to explain what the
 `--strict` flag is doing here. It is telling Nix to fully evaluate the value
-rather than be lazy about its evaluation. Let's try to evaluate the following
+rather than to be lazy about its evaluation. Let's try to evaluate the following
 file without the `--strict` flag:
 
 ```nix
@@ -402,10 +401,10 @@ error:
   requested.
 - Nix evaluates your code from end to start, meaning it tries to evaluate the
   final result first and evaluates its dependencies to do so.
-- Nix allows recursion: values can refer to themselves in their definition.
-- Nix allows repetition: values can contain themselves.
+- Nix allows recursion: Values can refer to themselves in their definition.
+- Nix allows repetition: Values can contain themselves.
 
-Nix lazy evaluation and recursion is at the very core of how nixpkgs and NixOS
-works! We'll see this in future chapters. In the next chapter, you're going to
+Nix's lazy evaluation and recursion is at the very core of how nixpkgs and NixOS
+work! We'll see this in future chapters. In the next chapter, you're going to
 learn about [nixpkgs](https://github.com/NixOS/nixpkgs){target="\_blank"} and
 its library.

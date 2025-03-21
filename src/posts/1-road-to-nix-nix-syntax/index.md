@@ -48,7 +48,7 @@ language:
   explained as they are intuitive.
 - Strings can be defined by surrounding text with double quotation marks.
 
-Just like in other programming languages, parenthesis can be used to indicate
+Just like in other programming languages, parentheses can be used to indicate
 priority:
 
 ```nix
@@ -332,7 +332,7 @@ This example evaluates to the following attribute set:
 
 ### `inherit` keyword
 
-The `inherit` keyword can be used as syntax sugar for `a = a`:
+The `inherit` keyword is syntactic sugar for `a = a`:
 
 ```nix
 let
@@ -342,7 +342,7 @@ in {
 }
 ```
 
-Attributes can be added in parenthesis to specify the path:
+Attributes can be added in parentheses to specify the path:
 
 ```nix
 let
