@@ -355,6 +355,26 @@ in {
 }
 ```
 
+In addition, multiple attributes can be inherited with only one `inherit`
+keyword:
+
+```nix
+let
+  a = {
+    b = 5;
+    c = 6;
+  };
+in {
+  inherit (a) b c; # This is the same as writing b = a.b; c = b.c;
+}
+```
+
+> Note: The `inherit` keyword can also be used in `let` bindings. In that case,
+> it is not exactly syntactic sugar for `a = a`, but rather the `a` on the right
+> is taken from outside of the `let` binding (or from where it's supposed to
+> come from). You should not worry about this and might understand it better in
+> the next chapter.
+
 ### Update operator
 
 `//` is the update operator for attribute sets. It will overwrite the attributes
