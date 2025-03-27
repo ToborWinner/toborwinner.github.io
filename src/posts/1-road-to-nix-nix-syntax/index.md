@@ -567,7 +567,7 @@ let
   # This is now a function that takes a list as input and returns a mapped list as output
   # Because `map` comes from `builtins`, it is called a partially applied priomp
   add5ToEachElement = map (x: x + 5);
-in add5ToEachElement [ 1 2 ] # Evaluates to [ 5 6 ]
+in add5ToEachElement [ 1 2 ] # Evaluates to [ 6 7 ]
 ```
 
 To find other `builtins`{.nix}, you can use the unofficial website
