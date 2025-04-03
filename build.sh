@@ -89,7 +89,7 @@ posts=""
 
 for key in "${sorted_posts[@]}"; do
 	link="${links[$key]}"
-	title="${titles[$key]}"
+	title=$(echo "${titles["$key"]}" | sed -e 's/&/\\&/g' -e 's/~/\\~/g')
 	description="${descriptions[$key]}"
 	date="${formatteddates[$key]}"
 
@@ -106,7 +106,7 @@ recentposts=""
 
 for key in "${sorted_posts[@]:0:4}"; do
 	link="${links[$key]}"
-	title="${titles[$key]}"
+	title=$(echo "${titles["$key"]}" | sed -e 's/&/\\&/g' -e 's/~/\\~/g')
 	description="${descriptions[$key]}"
 	date="${formatteddates[$key]}"
 
@@ -136,8 +136,10 @@ jq -c '.[]' "$SOURCEDIR/posts/guides.json" | while read -r obj; do
 
 	echo "$obj" | jq -r '.posts[]' | while read -r postobj; do
 		index="${dateindexes["$postobj"]}"
-		title="${titles["$index"]}"
+		title=$(echo "${titles["$index"]}" | sed -e 's/&/\\&/g' -e 's/~/\\~/g')
 		link="${links["$index"]}"
+
+		echo "$title"
 
 		# shellcheck disable=SC2016
 		sed \
