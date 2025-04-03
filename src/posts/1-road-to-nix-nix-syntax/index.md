@@ -365,7 +365,7 @@ let
     c = 6;
   };
 in {
-  inherit (a) b c; # This is the same as writing b = a.b; c = b.c;
+  inherit (a) b c; # This is the same as writing b = a.b; c = a.c;
 }
 ```
 
