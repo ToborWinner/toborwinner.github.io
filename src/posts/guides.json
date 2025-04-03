@@ -2,9 +2,8 @@
   {
     "name": "Road to Nix",
     "description": "Road to Nix is a guide meant to take you from the very basics of Nix to being an advanced NixOS user who can solve their own problems, package their own software and understand how it all works fundamentally. Road to Nix builds the knowledge from the grounds up, meaning it will take a while to get to the fun topics, but once you get to them, you will actually understand them. It's a guide I recommend to anyone who wants to get into NixOS or feels like they don't currently understand how NixOS works.",
-    "posts": [1742487785, 1742487800, 1742768218, 1742768237],
+    "posts": [1742487785, 1742487800, 1742768218, 1742768237, 1743717048],
     "todo": [
-      "5. Road to Nix - Derivations",
       "6. Road to Nix - The module system: Mini-NixOS from scratch",
       "7. Road to Nix - Configuring NixOS",
       "8. Road to Nix - Flakes and nix-command",

@@ -1,0 +1,5 @@
+{
+  "title": "5. Road to Nix - Derivations, Nix Store & Database",
+  "date": 1743717048,
+  "description": "In this chapter of Road to Nix you will be introduced to derivations: one of the most important features of Nix. You will also be introduced to the Nix store and the Nix database."
+}
