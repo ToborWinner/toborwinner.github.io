@@ -52,7 +52,7 @@
           type = "app";
           program = toString (
             pkgs.writeShellScript "local-tobor-blog.sh" ''
-              ${pkgs.lib.getExe pkgs.http-server} -a 127.0.0.1 ${
+              ${pkgs.lib.getExe pkgs.http-server} -c -1 -a 127.0.0.1 ${
                 self.packages.${pkgs.stdenv.hostPlatform.system}.tobor-blog
               }
             ''
